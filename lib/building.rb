@@ -8,5 +8,9 @@ class Building
     @units = []
     @renters = []
   end
+
+  def add_unit(unit)
+    @units << unit
+  end
   
 end
