@@ -22,4 +22,9 @@ class Building
     @renters.compact
   end
 
+  def average_rent
+    rents = @units.map {|unit| unit.monthly_rent.to_f}
+    rents.sum / @units.length
+  end
+
 end
