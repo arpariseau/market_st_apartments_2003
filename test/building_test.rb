@@ -97,4 +97,22 @@ class BuildingTest < Minitest::Test
     assert_equal expected_result, @building.units_by_number_of_bedrooms
   end
 
+  def test_annual_breakdown
+    unit1 = Apartment.new({number: "A1", monthly_rent: 1200, bathrooms: 1, bedrooms: 1})
+    unit2 = Apartment.new({number: "B2", monthly_rent: 999, bathrooms: 2, bedrooms: 2})
+    unit3 = Apartment.new({number: "C3", monthly_rent: 1150, bathrooms: 2, bedrooms: 2})
+    renter1 = Renter.new("Spencer")
+    renter2 = Renter.new("Jessie")
+
+    @building.add_unit(unit1)
+    @building.add_unit(unit2)
+    @building.add_unit(unit3)
+    unit2.add_renter(renter1)
+    first_breakdown = {"Spencer" => 11988}
+    assert_equal first_breakdown, @building.annual_breakdown
+    unit1.add_renter(renter2)
+    second_breakdown = {"Jessie" => 14400, "Spencer" => 11988}
+    assert_equal second_breakdown, @building.annual_breakdown
+  end
+
 end

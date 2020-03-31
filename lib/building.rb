@@ -43,5 +43,11 @@ class Building
     @units.each {|unit| bedrooms[unit.bedrooms] << unit.number}
     bedrooms
   end
-  
+
+  def annual_breakdown
+    breakdown = {}
+    rented_units.each {|unit| breakdown[unit.renter.name] = (unit.monthly_rent * 12)}
+    breakdown
+  end
+
 end
