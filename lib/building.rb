@@ -27,4 +27,8 @@ class Building
     rents.sum / @units.length
   end
 
+  def rented_units
+    @units.find_all {|unit| !unit.renter.nil?}
+  end
+
 end
