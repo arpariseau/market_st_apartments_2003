@@ -6,7 +6,6 @@ class Building
 
   def initialize
     @units = []
-    @renters = []
   end
 
   def add_unit(unit)
@@ -14,12 +13,12 @@ class Building
   end
 
   def renters
-    @renters = @units.map do |unit|
+    renters = @units.map do |unit|
       if !unit.renter.nil?
         unit.renter.name
       end
     end
-    @renters.compact
+    renters.compact
   end
 
   def average_rent
@@ -31,4 +30,8 @@ class Building
     @units.find_all {|unit| !unit.renter.nil?}
   end
 
+  def renter_with_highest_rent
+    highest_rented = rented_units.max_by {|unit| unit.monthly_rent}
+    highest_rented.renter
+  end
 end
