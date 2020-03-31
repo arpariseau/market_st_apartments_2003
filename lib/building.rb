@@ -1,5 +1,6 @@
 require './lib/apartment'
 require './lib/renter'
+require 'pry'
 
 class Building
   attr_reader :units
@@ -34,4 +35,13 @@ class Building
     highest_rented = rented_units.max_by {|unit| unit.monthly_rent}
     highest_rented.renter
   end
+
+  def units_by_number_of_bedrooms
+    max_bedrooms = @units.max_by {|unit| unit.bedrooms}.bedrooms
+    bedrooms = {}
+    (1..max_bedrooms).each {|num| bedrooms[num] = []}
+    @units.each {|unit| bedrooms[unit.bedrooms] << unit.number}
+    bedrooms
+  end
+  
 end
