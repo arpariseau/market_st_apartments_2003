@@ -50,4 +50,13 @@ class Building
     breakdown
   end
 
+  def rooms_by_renter
+    renter_rooms = {}
+    rented_units.each do |unit|
+      rooms = {bedrooms: unit.bedrooms, bathrooms: unit.bathrooms}
+      renter_rooms[unit.renter] = rooms
+    end
+    renter_rooms
+  end
+
 end
